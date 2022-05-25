@@ -1,0 +1,85 @@
+`packages/Human.java`
+
+```
+package packages;
+public class Human {
+
+  public String name;
+
+  public Human() {
+    this.name = "no name";
+  }
+
+  public void setName(String str) {
+    this.name = str;
+  }
+
+  public void getGreetings() {
+    System.out.println("Greetings");
+  }
+}
+```
+
+`packages/Japanese.java`
+
+```
+package packages;
+import packages.Human;
+public class Japanese extends Human {
+  public Japanese() {
+    super();
+  }
+  @Override
+  public void getGreetings() {
+    System.out.println(name + ":こんにちは");
+  }
+}
+```
+
+`packages/American.java`
+```
+package packages;
+import packages.Human;
+public class American extends Human {
+  public American() {
+    super();
+  }
+  @Override
+  public void getGreetings() {
+    System.out.println(name + ":Hello");
+  }
+}
+```
+
+`Hello.java`
+```
+import packages.Human;
+import packages.Japanese;
+import packages.American;
+public class Hello {
+  public static void main(String[] args) {
+    Human mizuno = new Japanese();
+    Human rod = new American();
+    mizuno.setName("水野");
+    rod.setName("Rod");
+    mizuno.getGreetings();
+    rod.getGreetings();
+  }
+}
+```
+
+実行結果（1）
+```
+水野:こんにちは
+Rod:Hello
+```
+
+実行結果（2）
+```
+Greetings
+Rod:Hello
+```
+
+JapaneseクラスでgetGreetings()のOverrideをしなければ、
+`mizuno.getGreetings();`を呼んだときに、
+Humanクラスで定義されたgetGreetings()が実行される。
