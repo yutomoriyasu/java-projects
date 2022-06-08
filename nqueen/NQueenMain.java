@@ -34,6 +34,9 @@ public class NQueenMain {
 	 	
 	 	//Nクイーンの全ての解を表示する
 		//追記してください
+		 if (nq.tryQueenAll(0)) { System.out.println(nq.getcount()); } 
+		 else {
+		 System.out.println("No solution."); }
 
 	}
 

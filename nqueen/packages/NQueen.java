@@ -86,9 +86,49 @@ public class NQueen {
     }
 	}
 
-	public void tryQueenAll(int a) {
+	public boolean tryQueenAll(int a) {
 		//左から右に順番にクイーンが置けるかどうかを調べる
 		//ここに追記してください
+    for (int i = pos[a] + 1; i < N; i++) {
+      if (col[i] == Status.NOT_FREE) {
+        continue;
+      }
+      if (down[N - a + i - 1] == Status.NOT_FREE) {
+        continue;
+      }
+      if (up[a + i] == Status.NOT_FREE) {
+        continue;
+      }
+      pos[a] = i;
+      col[i] = Status.NOT_FREE;
+      down[N - a + i - 1] = Status.NOT_FREE;
+      up[a + i] = Status.NOT_FREE;
+      if (a == N - 1) {
+        count++;
+        print();
+        System.out.println("--------");
+        col[pos[a]] = Status.FREE;
+        down[N - a + pos[a] - 1] = Status.FREE;
+        up[a + pos[a]] = Status.FREE;
+        pos[a] = -1;
+        return true;
+      }
+      if (tryQueenAll(a + 1)) {
+        col[pos[a]] = Status.FREE;
+        down[N - a + pos[a] - 1] = Status.FREE;
+        up[a + pos[a]] = Status.FREE;
+        pos[a] = -1;
+        if (pos[a] == N - 1) {
+          return true;
+        }
+      } else {
+        col[pos[a]] = Status.FREE;
+        down[N - a + pos[a] - 1] = Status.FREE;
+        up[a + pos[a]] = Status.FREE;
+        pos[a] = -1;
+      }
+    }
+    return false;
 	}
 	
 	public int getcount() {
