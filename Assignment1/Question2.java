@@ -1,0 +1,68 @@
+public class Question2 {
+
+    public double solve(double x0, double x1) {
+        int max = 100; // 最大反復回数
+        double oldx = x0, x = x1, newx, fdx = 0.0, fx;
+        boolean flag = true; // trueのうちは反復、falseにしたら反復終了というように使ってもよい
+        int iter = 0; // 反復回数を数えるのに使ってもよい
+
+        System.out.println("Secant: i=" + iter + ", x=" + oldx);
+        iter++;
+        System.out.println("Secant: i=" + iter + ", x=" + x);
+        iter++;
+
+        /////////////// TO DO ////////////////
+        // 
+        // 100回計算しても収束しないとあきらめるようにしましょう
+        // x0とx1の両方を入力できるようになっていますが、この問題はx0のみ使います
+        // x0は、配布されたSolverMain.javaで読み込まれ、oldxに代入済みです
+        // 
+        // f(x0)とf'(x0)を求めます
+        // oldx(xiのこと)と、f(x0)とf'(x0)を使って、newx(xi+1のこと)を求めます
+        // xiとxi+1の差（絶対値）を見て解が求まっていたら終了
+        // 求まっていないようならxi+2へと進むためにループする
+        /////////////////////////////////////
+
+        newx = x - (x - oldx) * fun(x) / (fun(x) - fun(oldx));
+        while (flag) {
+            System.out.println("Secant: i=" + iter + ", x=" + newx);
+            newx = x - (x - oldx) * fun(x) / (fun(x) - fun(oldx));
+            iter++;
+            if (Math.abs(newx - x) <= Math.pow(10.0, -7.0)) {
+                flag = false;
+            }
+            oldx = x;
+            x = newx;
+        }
+        System.out.println("Secant: i=" + iter + ", x=" + newx);
+
+        // 初期値としてx0とx1を与えられたときに解を求めて返す
+        // System.out.println("初期値としてx0(とx1)を与えられたときに解を求めて返す");
+        return newx;
+        
+    }
+
+    public double fun(double x) {
+        /////////////// TO DO ////////////////
+        // xにおける関数f(x)の値を返す関数を作成する
+        /////////////////////////////////////
+        // xを与えられたときに対応する値を返す
+        // System.out.println("xを与えられたときに対応する値を返す");
+        return 0.5 - x + 0.2 * Math.sin(x);
+    }
+
+    public double diffFun(double x) {
+        /////////////// TO DO ////////////////
+        // xにおける関数f(x)の微分を返す関数を作成する
+        /////////////////////////////////////
+        // System.out.println("xにおける微分関数の値を返す");
+        return -1 + 0.2 * Math.cos(x);
+    }
+
+    public double diffFun(double x0, double x1) {
+        // x0とx1の2点を使って微分関数の値を返す
+        // 微分関数が求まらない場合に有効
+        // System.out.println("x0,x1における微分関数の値を返す");
+        return (fun(x1) - fun(x0)) / (x1 - x0);
+    }
+}
