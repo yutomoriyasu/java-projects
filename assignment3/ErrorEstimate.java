@@ -39,6 +39,7 @@ public class ErrorEstimate {
 		hとxから誤差を計算する式を（手計算で）求めてプログラム化する。
 
 		*/
+		return (x+h) * x * (x-h) * Math.cos(x) / 6;
 	}
 
 	static double MaxErrorEstimate(double h){
@@ -49,6 +50,8 @@ public class ErrorEstimate {
 		hが与えられた際の最大誤差を計算する式を（手計算で）求めてプログラム化する。
 
 		*/
+		double mx = MaxErrorEstimateX(h);
+		return Math.abs(ErrorEstimateCalc(h, mx));
 	}
 
 	static double MaxErrorEstimateX(double h){
@@ -59,6 +62,7 @@ public class ErrorEstimate {
 		最大誤差を取るときのxの値を求める式を（手計算で）求めてプログラム化する。
 
 		*/
+		return Math.sqrt(h*h/3);
 	}
 
 }
