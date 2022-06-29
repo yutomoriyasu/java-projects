@@ -67,16 +67,38 @@ public class Spline {
         // (11)式を参考に拡大係数行列を作成する。
         // 最初の行と最後の行は自然条件
         // 中間の行は繰り返し
+        for (int i = 0; i < Nnode; i++) {
+            if (i == 0) {
+                aa[i][i] = 2 * h[i];
+                aa[i][i+1] = h[i];
+                aa[i][Nnode] = 3 * (f[i+1] - f[i]);
+                continue;
+            }
+            if (i > 0 && i < Nnode - 1) {
+                aa[i][i-1] = h[i];
+                aa[i][i] = 2 * (h[i-1] + h[i]);
+                aa[i][i+1] = h[i-1];
+                aa[i][Nnode] = 3 * (((f[i]-f[i-1]) * h[i] / h[i-1]) + ((f[i+1]-f[i]) * h[i-1] / h[i]));
+                continue;
+            }
+            if (i == Nnode - 1) {
+                aa[i][i-1] = h[i-1];
+                aa[i][i] = 2 * h[i-1];
+                aa[i][Nnode] = 3 * (f[i] - f[i-1]);
+                continue;
+            }
+        }
 
 
 
-        
         // aaをガウスの消去法で解く
         aa = s.PivotGauss(aa);
         
         
         // aaの中にfdashの値が含まれているはずなので、その部分をfdashに転記する
-        
+        for (int i = 0; i < Nnode; i++) {
+            fdash[i] = aa[i][Nnode];
+        }
         
         
         
