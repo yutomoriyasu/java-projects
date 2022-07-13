@@ -27,6 +27,7 @@ public class SinSolver {
             } else if (sol == SOL_4P) {
                 ans = solver.solve4point();
             } 
+            System.out.println("integral 2 points: " + ans);
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
@@ -51,16 +52,17 @@ public class SinSolver {
         //
         // 課題 1
         //
-        
-
-
+        return (UP-DOWN)/2 * (ALPHA_2 * fun(changeRange(X_2)) + ALPHA_2 * fun(changeRange(-X_2)));
     }
 
     public double solve4point() {
         //
         // 課題 2
         //
-
+        return (UP-DOWN)/2 * (
+            ALPHA_4_1 * fun(changeRange(X_4_1)) + ALPHA_4_1 * fun(changeRange(-X_4_1))
+            +  ALPHA_4_2 * fun(changeRange(X_4_2)) + ALPHA_4_2 * fun(changeRange(-X_4_2))
+        );
     }
 
     // sin(x) を返す　使わなくても良い
@@ -71,7 +73,7 @@ public class SinSolver {
 
     // 変数変換をsolve4pint()などの中で行う場合はこの関数は使わなくてもよい
     private double changeRange(double x) {
-            double changeVariable = ((UP - DOWN) * x / 2) + ((UP - DOWN) / 2);
-            return changeVariable;
+        double changeVariable = ((UP - DOWN) * x / 2) + ((UP - DOWN) / 2);
+        return changeVariable;
     }
 }
