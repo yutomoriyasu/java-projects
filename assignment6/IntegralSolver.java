@@ -39,9 +39,7 @@ public class IntegralSolver {
         //
         //　課題部分 1
         //
-
-
-
+        return ((b-a)/2) * (fun(b)+fun(a));
     }
 
     // aからbまでの関数f(x)の2点のガウス積分結果を返す
@@ -49,9 +47,7 @@ public class IntegralSolver {
         //
         //　課題部分 2
         //
-
-
-
+        return 1*fun(1/Math.sqrt(3))+1*fun(-1/Math.sqrt(3));
     }
 
     // exp(x) を返す
@@ -59,5 +55,4 @@ public class IntegralSolver {
     public double fun(double x) {
         return Math.exp(x);
     }
-
 }
