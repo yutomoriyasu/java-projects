@@ -34,7 +34,6 @@ abstract class OrdinaryDifferentialSolver {
             //ここから記入してください
 
 
-
             System.out.print("y(0) = ");
             System.out.flush();
             y[0] = Double.parseDouble(sr.readLine());
