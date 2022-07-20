@@ -3,8 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 abstract class OrdinaryDifferentialSolver {
-    double[] x = new double[10]; // xi用配列
-    double[] y = new double[10]; // yi用配列
+    double[] x; // xi用配列
+    double[] y; // yi用配列
     double h; // 刻み幅 h
     double n; // xの範囲用変数 n
 
@@ -32,7 +32,9 @@ abstract class OrdinaryDifferentialSolver {
             n = Double.parseDouble(sr.readLine());
 
             //ここから記入してください
-
+            int newLength = (int)(n/h) + 1;
+            x = new double[newLength];
+            y = new double[newLength];
 
             System.out.print("y(0) = ");
             System.out.flush();
